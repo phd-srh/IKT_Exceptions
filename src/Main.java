@@ -2,6 +2,11 @@ import java.io.FileReader;
 
 public class Main {
 
+    public static void fieseMethode(int x) {
+        if (x < 0) return;
+        fieseMethode(x+1);
+    }
+
     public static int irgendeineMethode(int divisor) throws HeyDasGehtNichtException {
         if (divisor == 0)
             throw new HeyDasGehtNichtException();
@@ -11,6 +16,7 @@ public class Main {
 
     public static void main(String[] args) {
         try {
+            fieseMethode(25);
             int y = irgendeineMethode(0);
             String eingabe = "21 Jahre";
             int i = Integer.parseInt(eingabe);
@@ -26,9 +32,14 @@ public class Main {
             System.err.println( e.getMessage() );
             e.printStackTrace();
         }
+        catch (IllegalArgumentException ignored) {}
         catch (Exception e) {
             System.out.println("Das gabs wohl ein Fehler!?");
         }
+        // Sollte nicht benutzt werden, da die JavaVM leicht verwirrt ist
+//        catch (Error e) {
+//            System.out.println("Autsch, das tut echt weh!");
+//        }
         finally {
             System.out.println("Was hier steht, wird immer ausgeführt");
             System.out.println("Egal ob Fehler oder kein Fehler!");
